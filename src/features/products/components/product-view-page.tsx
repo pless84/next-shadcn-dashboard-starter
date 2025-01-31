@@ -1,4 +1,4 @@
-import { fakeProducts, Product } from '@/constants/mock-api';
+import { type Product, fakeProducts } from '@/constants/mock-api';
 import { notFound } from 'next/navigation';
 import ProductForm from './product-form';
 
@@ -18,7 +18,7 @@ export default async function ProductViewPage({
     if (!product) {
       notFound();
     }
-    pageTitle = `Edit Product`;
+    pageTitle = 'Edit Product';
   }
 
   return <ProductForm initialData={product} pageTitle={pageTitle} />;

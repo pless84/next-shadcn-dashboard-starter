@@ -41,7 +41,7 @@ export default function StatsError({ error, reset }: StatsErrorProps) {
           </p>
           <Button
             onClick={() => reload()}
-            variant='outline'
+            variant='secondary'
             className='min-w-[120px]'
             disabled={isPending}
           >

@@ -135,9 +135,9 @@ export function FileUploader(props: FileUploaderProps) {
       setFiles(updatedFiles);
 
       if (rejectedFiles.length > 0) {
-        rejectedFiles.forEach(({ file }) => {
+        for (const { file } of rejectedFiles) {
           toast.error(`File ${file.name} was rejected`);
-        });
+        }
       }
 
       if (
@@ -146,7 +146,7 @@ export function FileUploader(props: FileUploaderProps) {
         updatedFiles.length <= maxFiles
       ) {
         const target =
-          updatedFiles.length > 0 ? `${updatedFiles.length} files` : `file`;
+          updatedFiles.length > 0 ? `${updatedFiles.length} files` : 'file';
 
         toast.promise(onUpload(updatedFiles), {
           loading: `Uploading ${target}...`,
@@ -234,7 +234,7 @@ export function FileUploader(props: FileUploaderProps) {
                   <p className='text-sm text-muted-foreground/70'>
                     You can upload
                     {maxFiles > 1
-                      ? ` ${maxFiles === Infinity ? 'multiple' : maxFiles}
+                      ? ` ${maxFiles === Number.POSITIVE_INFINITY ? 'multiple' : maxFiles}
                       files (up to ${formatBytes(maxSize)} each)`
                       : ` a file with ${formatBytes(maxSize)}`}
                   </p>
@@ -247,11 +247,13 @@ export function FileUploader(props: FileUploaderProps) {
       {files?.length ? (
         <ScrollArea className='h-fit w-full px-3'>
           <div className='max-h-48 space-y-4'>
-            {files?.map((file, index) => (
+            {files?.map((file) => (
               <FileCard
-                key={index}
+                key={file.name}
                 file={file}
-                onRemove={() => onRemove(index)}
+                onRemove={() =>
+                  onRemove(files.findIndex((f) => f.name === file.name))
+                }
                 progress={progresses?.[file.name]}
               />
             ))}

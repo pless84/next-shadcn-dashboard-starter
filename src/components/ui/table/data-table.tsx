@@ -21,11 +21,11 @@ import {
   DoubleArrowRightIcon
 } from '@radix-ui/react-icons';
 import {
-  ColumnDef,
+  type ColumnDef,
+  type PaginationState,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
-  PaginationState,
   useReactTable
 } from '@tanstack/react-table';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';

@@ -1,22 +1,22 @@
 'use client';
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { Task, useTaskStore } from '../utils/store';
-import { hasDraggableData } from '../utils';
 import {
-  Announcements,
+  type Announcements,
   DndContext,
-  DragOverlay,
-  MouseSensor,
-  TouchSensor,
-  UniqueIdentifier,
-  useSensor,
-  useSensors,
   type DragEndEvent,
   type DragOverEvent,
-  type DragStartEvent
+  DragOverlay,
+  type DragStartEvent,
+  MouseSensor,
+  TouchSensor,
+  type UniqueIdentifier,
+  useSensor,
+  useSensors
 } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { hasDraggableData } from '../utils';
+import { type Task, useTaskStore } from '../utils/store';
 import type { Column } from './board-column';
 import { BoardColumn, BoardContainer } from './board-column';
 import NewSectionDialog from './new-section-dialog';
@@ -53,7 +53,7 @@ export function KanbanBoard() {
   const tasks = useTaskStore((state) => state.tasks);
   const setTasks = useTaskStore((state) => state.setTasks);
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
-  const [isMounted, setIsMounted] = useState<Boolean>(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
@@ -94,7 +94,8 @@ export function KanbanBoard() {
         return `Picked up Column ${startColumn?.title} at position: ${
           startColumnIdx + 1
         } of ${columnsId.length}`;
-      } else if (active.data.current?.type === 'Task') {
+      }
+      if (active.data.current?.type === 'Task') {
         pickedUpTaskColumn.current = active.data.current.task.status;
         const { tasksInColumn, taskPosition, column } = getDraggingTaskData(
           active.id,
@@ -116,7 +117,8 @@ export function KanbanBoard() {
         return `Column ${active.data.current.column.title} was moved over ${
           over.data.current.column.title
         } at position ${overColumnIdx + 1} of ${columnsId.length}`;
-      } else if (
+      }
+      if (
         active.data.current?.type === 'Task' &&
         over.data.current?.type === 'Task'
       ) {
@@ -152,7 +154,8 @@ export function KanbanBoard() {
         } was dropped into position ${overColumnPosition + 1} of ${
           columnsId.length
         }`;
-      } else if (
+      }
+      if (
         active.data.current?.type === 'Task' &&
         over.data.current?.type === 'Task'
       ) {

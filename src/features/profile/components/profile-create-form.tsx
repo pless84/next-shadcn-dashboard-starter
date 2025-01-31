@@ -24,13 +24,19 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { profileSchema, type ProfileFormValues } from '../utils/form-schema';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AlertTriangleIcon, Trash, Trash2Icon } from 'lucide-react';
+import {
+  AlertTriangleIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  Trash,
+  Trash2Icon
+} from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { type ProfileFormValues, profileSchema } from '../utils/form-schema';
 
 interface ProfileFormType {
   initialData: any | null;
@@ -95,8 +101,8 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
         // console.log("product", res);
       }
       router.refresh();
-      router.push(`/dashboard/products`);
-    } catch (error: any) {
+      router.push('/dashboard/products');
+    } catch (error: unknown) {
     } finally {
       setLoading(false);
     }
@@ -108,7 +114,7 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
       //   await axios.delete(`/api/${params.storeId}/products/${params.productId}`);
       router.refresh();
       router.push(`/${params.storeId}/products`);
-    } catch (error: any) {
+    } catch (error: unknown) {
     } finally {
       setLoading(false);
       setOpen(false);
@@ -134,17 +140,15 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
       id: 'Step 2',
       name: 'Professional Informations',
       // fields are mapping and flattening for the error to be trigger  for the dynamic fields
-      fields: fields
-        ?.map((_, index) => [
-          `jobs.${index}.jobtitle`,
-          `jobs.${index}.employer`,
-          `jobs.${index}.startdate`,
-          `jobs.${index}.enddate`,
-          `jobs.${index}.jobcountry`,
-          `jobs.${index}.jobcity`
-          // Add other field names as needed
-        ])
-        .flat()
+      fields: fields?.flatMap((_, index) => [
+        `jobs.${index}.jobtitle`,
+        `jobs.${index}.employer`,
+        `jobs.${index}.startdate`,
+        `jobs.${index}.enddate`,
+        `jobs.${index}.jobcountry`,
+        `jobs.${index}.jobcity`
+        // Add other field names as needed
+      ])
     },
     { id: 'Step 3', name: 'Complete' }
   ];
@@ -596,48 +600,20 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
       {/* Navigation */}
       <div className='mt-8 pt-5'>
         <div className='flex justify-between'>
-          <button
-            type='button'
+          <Button
             onClick={prev}
             disabled={currentStep === 0}
-            className='rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50'
+            variant='secondary'
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth='1.5'
-              stroke='currentColor'
-              className='h-6 w-6'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M15.75 19.5L8.25 12l7.5-7.5'
-              />
-            </svg>
-          </button>
-          <button
-            type='button'
+            <ChevronLeftIcon />
+          </Button>
+          <Button
             onClick={next}
             disabled={currentStep === steps.length - 1}
-            className='rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50'
+            variant='secondary'
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth='1.5'
-              stroke='currentColor'
-              className='h-6 w-6'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M8.25 4.5l7.5 7.5-7.5 7.5'
-              />
-            </svg>
-          </button>
+            <ChevronRightIcon />
+          </Button>
         </div>
       </div>
     </>

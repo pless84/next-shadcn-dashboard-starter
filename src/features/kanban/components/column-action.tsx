@@ -19,10 +19,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { useTaskStore } from '../utils/store';
-import { UniqueIdentifier } from '@dnd-kit/core';
 import { Input } from '@/components/ui/input';
+import type { UniqueIdentifier } from '@dnd-kit/core';
 import { toast } from 'sonner';
+import { useTaskStore } from '../utils/store';
 
 export function ColumnActions({
   title,
@@ -69,7 +69,7 @@ export function ColumnActions({
             onSelect={() => {
               setIsEditDisable(!editDisable);
               setTimeout(() => {
-                inputRef.current && inputRef.current?.focus();
+                inputRef.current?.focus();
               }, 500);
             }}
           >
@@ -101,7 +101,9 @@ export function ColumnActions({
               variant='destructive'
               onClick={() => {
                 // yes, you have to set a timeout
-                setTimeout(() => (document.body.style.pointerEvents = ''), 100);
+                setTimeout(() => {
+                  document.body.style.pointerEvents = '';
+                }, 100);
 
                 setShowDeleteDialog(false);
                 removeCol(id);

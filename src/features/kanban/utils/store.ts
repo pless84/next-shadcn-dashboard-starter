@@ -1,8 +1,8 @@
-import { create } from 'zustand';
+import type { UniqueIdentifier } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { UniqueIdentifier } from '@dnd-kit/core';
-import { Column } from '../components/board-column';
+import type { Column } from '../components/board-column';
 
 export type Status = 'TODO' | 'IN_PROGRESS' | 'DONE';
 

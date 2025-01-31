@@ -1,5 +1,5 @@
-import { SearchParams } from 'nuqs/server';
 import ProfileViewPage from '@/features/profile/components/profile-view-page';
+import type { SearchParams } from 'nuqs/server';
 
 type pageProps = {
   searchParams: Promise<SearchParams>;

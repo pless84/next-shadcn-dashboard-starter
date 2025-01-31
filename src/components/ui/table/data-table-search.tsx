@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { Options } from 'nuqs';
+import type { Options } from 'nuqs';
 import { useTransition } from 'react';
 
 interface DataTableSearchProps {

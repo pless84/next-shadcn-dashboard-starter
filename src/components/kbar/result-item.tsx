@@ -25,13 +25,13 @@ const ResultItem = React.forwardRef(
     return (
       <div
         ref={ref}
-        className={`relative z-10 flex cursor-pointer items-center justify-between px-4 py-3`}
+        className='relative z-10 flex cursor-pointer items-center justify-between px-4 py-3'
       >
         {active && (
           <div
             id='kbar-result-item'
             className='absolute inset-0 !z-[-1] border-l-4 border-sidebar-primary bg-sidebar-accent'
-          ></div>
+          />
         )}
         <div className='relative z-10 flex items-center gap-2'>
           {action.icon && action.icon}
@@ -55,9 +55,9 @@ const ResultItem = React.forwardRef(
         </div>
         {action.shortcut?.length ? (
           <div className='relative z-10 grid grid-flow-col gap-1'>
-            {action.shortcut.map((sc, i) => (
+            {action.shortcut.map((sc) => (
               <kbd
-                key={sc + i}
+                key={sc}
                 className='flex items-center gap-1 rounded-md border px-1.5 py-1 text-xs font-medium shadow'
               >
                 {sc}

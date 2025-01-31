@@ -2,7 +2,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { StarIcon } from 'lucide-react';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import UserAuthForm from './user-auth-form';
 
@@ -36,6 +36,7 @@ export default function SignInViewPage({ stars }: { stars: number }) {
             strokeLinejoin='round'
             className='mr-2 h-6 w-6'
           >
+            <title>Logo</title>
             <path d='M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3' />
           </svg>
           Logo

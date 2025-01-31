@@ -1,6 +1,6 @@
 'use client';
-import { Product } from '@/constants/data';
-import { ColumnDef } from '@tanstack/react-table';
+import type { Product } from '@/constants/data';
+import type { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
 import { CellAction } from './cell-action';
 

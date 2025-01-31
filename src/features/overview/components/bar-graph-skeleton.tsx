@@ -24,15 +24,18 @@ export function BarGraphSkeleton() {
       <CardContent className='px-2 sm:p-6'>
         {/* Bar-like shapes */}
         <div className='flex aspect-auto h-[280px] w-full items-end justify-around gap-2 pt-8'>
-          {Array.from({ length: 12 }).map((_, i) => (
-            <Skeleton
-              key={i}
-              className='w-full'
-              style={{
-                height: `${Math.max(20, Math.random() * 100)}%`
-              }}
-            />
-          ))}
+          {Array.from({ length: 12 }).map((_, i) => {
+            const uniqueKey = `skeleton-${i}-${Math.random()}`;
+            return (
+              <Skeleton
+                key={uniqueKey}
+                className='w-full'
+                style={{
+                  height: `${Math.max(20, Math.random() * 100)}%`
+                }}
+              />
+            );
+          })}
         </div>
       </CardContent>
     </Card>
